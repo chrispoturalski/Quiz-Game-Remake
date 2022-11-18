@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Anton', sans-serif;
+}
+
+:root {
+    --primary: whitesmoke;
+    --secondary: rgb(23, 237, 237);
+    --tertiary: rgb(224, 251, 21);
+    --fourth: rgb(30, 29, 29);
+}
+
+.header {
+    background-color: var(--secondary);
+}
+
+main {
+    background-color: var(--secondary);
+    width: 800px;
+    height: auto;
+    margin: 20px auto;
+}
+
+.quiz-game-card {
+    background-color: var(--fourth);
+    position: relative;
+    width: 600px;
+    height: 500px;
+    margin: auto;
+}
+
+#game-score {
+    color: var(--tertiary);
+}
+
+#timer {
+    color: var(--tertiary);
+    position: absolute;
+    top:0;
+    right:0;
+}
+
+
+
+.game {
+    color: var(--fourth);
+}
+
+#question-area {
+    color: var(--fourth);
+}
+
+#question-text {
+    color: var(--fourth);
+}
+
+#answer-choices {
+    color: var(--fourth);
+}
+
+.button-option {
+    color: var(--fourth);
+}
+
+#start-game {
+    background-color: var(--fourth);
+    color: var(--secondary);
+    position: absolute;
+    margin-left:-50px;
+    left:50%;
+    width:100px;
+    bottom:0px;
+}
