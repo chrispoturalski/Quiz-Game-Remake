@@ -1,6 +1,7 @@
 * {
     box-sizing: border-box;
     font-family: 'Anton', sans-serif;
+    
 }
 
 :root {
@@ -10,8 +11,12 @@
     --fourth: rgb(30, 29, 29);
 }
 
-.header {
+body {
     background-color: var(--secondary);
+}
+
+.header {
+    color: var(--tertiary);
 }
 
 main {
@@ -27,17 +32,21 @@ main {
     width: 600px;
     height: 500px;
     margin: auto;
+    border-radius: 2%;
 }
 
 #game-score {
     color: var(--tertiary);
+    position: absolute;
+    top: 5px;
+    left: 5px;
 }
 
 #timer {
     color: var(--tertiary);
     position: absolute;
-    top:0;
-    right:0;
+    top: 5px;
+    right: 5px;
 }
 
 
@@ -69,5 +78,10 @@ main {
     margin-left:-50px;
     left:50%;
     width:100px;
-    bottom:0px;
+    bottom: 5px;
+}
+
+button {
+    border-radius: 10%;
+    border: 2px solid var(--primary);
 }
