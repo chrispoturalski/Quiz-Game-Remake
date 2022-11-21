@@ -17,6 +17,9 @@ body {
 
 .header {
     color: var(--tertiary);
+    text-align: right;
+    position: relative;
+    left: -50px;
 }
 
 main {
@@ -42,7 +45,7 @@ main {
     left: 5px;
 }
 
-#timer {
+#setTimer {
     color: var(--tertiary);
     position: absolute;
     top: 5px;
@@ -52,36 +55,95 @@ main {
 
 
 .game {
-    color: var(--fourth);
+    color: var(--primary);
 }
 
 #question-area {
-    color: var(--fourth);
+    color: var(--fourth);  
 }
 
 #question-text {
-    color: var(--fourth);
+    color: var(--tertiary);
+    font-size: 32px;
+    position: absolute;
+    width: auto;
+    left: 0px;
+    right: 0px;
+    top: 75px;
+    text-align: center;
 }
 
-#answer-choices {
-    color: var(--fourth);
+#answer-choices button {
+    color: var(--tertiary);
+    background-color: var(--fourth);
+    border: 2px solid var(--primary);
+    position: absolute;
+    text-align: center;
+    font-size: 24px;
 }
 
-.button-option {
+#answer-choices button:hover {
+    background-color: var(--secondary);
     color: var(--fourth);
+    cursor: pointer;
 }
+
+#answer-choices button:active {
+    background-color: var(--tertiary);
+    color: var(--fourth);
+    cursor: pointer;
+}
+
+#option-one {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 175px;
+}
+
+#option-two {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 225px;
+}
+
+#option-three {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 275px;
+}
+
+
 
 #start-game {
     background-color: var(--fourth);
     color: var(--secondary);
+    font-size: 24px;
     position: absolute;
-    margin-left:-50px;
-    left:50%;
-    width:100px;
+    left: 0px;
+    right: 0px;
     bottom: 5px;
+    width: auto;
+}
+
+#start-game:hover {
+    background-color: var(--secondary);
+    color: var(--fourth);
+    cursor: pointer;
+}
+
+#start-game:active {
+    background-color: var(--tertiary);
+    color: var(--fourth);
+    cursor: pointer;
 }
 
 button {
     border-radius: 10%;
     border: 2px solid var(--primary);
+    text-align: center;
+    width: auto;
 }
+
