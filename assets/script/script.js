@@ -12,6 +12,10 @@ var optionOne = document.getElementById('option-one')
 var optionTwo = document.getElementById('option-two')
 var optionThree = document.getElementById('option-three')
 var startBtn = document.getElementById('start-game')
+var highscores = document.getElementById('highscores')
+var scoreOne = document.getElementById('score-one')
+var scoreTwo = document.getElementById('score-two')
+var scoreThree = document.getElementById('score-three')
 
 //Questions array
 var questions = 
@@ -51,7 +55,6 @@ var questions =
 ]
 
 // created game variables
-var currentQuestion = 0;
 var gameRunning = false;
 var timeLeft = 60;
 var score = 0;
@@ -68,7 +71,7 @@ var startGame = function () {
     gameRunning = true;
     currentQuestion = 0;
     startTimer();
-    displayQuestions(questions[currentQuestion]);
+    beginQuiz(questions[currentQuestion]);
     startBtn.style.display = "none";
 }
 
@@ -98,32 +101,37 @@ function decreaseTime() {
     }
 }
 
-
+// how to input data-correct="${question.answers[0]}
 
 //Function to display the questions
-function displayQuestions(question){
-    //console.log(questions[0]);
-    questionText.innerHTML = `${question.question}`; //displays the question
-    optionOne.innerHTML = `${question.answers[0].option}` //displays answers from array
-    optionTwo.innerHTML = `${question.answers[1].option}` //displays answers from array
-    optionThree.innerHTML = `${question.answers[2].option}` //displays answers from array
-    optionOne.addEventListener('click', getAnswer);
-    optionTwo.addEventListener('click', getAnswer);
-    optionThree.addEventListener('click', getAnswer);
-    if (questions.length === 0) {
-        endGame();
-    }
-}
-
-function getAnswer(event){
-    if (event.currentTarget.dataset.correct === "true") {
-        console.log(+10);
-    } else {
-        decreaseTime();
-    }
-    currentQuestion++;
-    displayQuestions(questions[currentQuestion]);
-    if (questions.length === currentQuestion) {
+function beginQuiz(){
+    currentQuestion = 0;
+    questionText.innerHTML = questions[currentQuestion].question; //displays the question
+    optionOne.innerHTML = questions[currentQuestion].answers[0].option; //displays answers from array
+    optionTwo.innerHTML = questions[currentQuestion].answers[1].option; //displays answers from array
+    optionThree.innerHTML = questions[currentQuestion].answers[2].option; //displays answers from array
+    optionOne.addEventListener('click', function(event) {
+        if (event.currentTarget.dataset.answer === 'true') {
+            console.log("Good job!")
+        } else {
+            console.log("Bad job!")
+        }
+    });
+    optionTwo.addEventListener('click', function(event) {
+        if (event.currentTarget.dataset.answer === 'true') {
+            console.log("Good job!")
+        } else {
+            console.log("Bad job!")
+        }
+    });
+    optionThree.addEventListener('click', function(event) {
+        if (event.currentTarget.dataset.answer === 'true') {
+            console.log("Good job!")
+        } else {
+            console.log("Bad job!")
+        }
+    });
+    if (questions.length > 4) {
         endGame();
     }
 }
@@ -139,7 +147,9 @@ var endGame = function () {
     //highscoreDisplay();
 }
 
+
+
 // Create event listener for game
 startBtn.addEventListener('click', startGame);
-// highscore.addEventListener('click', highscores);
+highscoreBtn.addEventListener('click', highscores);
 

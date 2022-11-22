@@ -12,18 +12,16 @@
 }
 
 body {
-    background-color: var(--secondary);
+    background: url("https://i.makeagif.com/media/9-10-2016/PPCKYi.gif");
+    background-size:cover;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
-.header {
-    color: var(--tertiary);
-    text-align: right;
-    position: relative;
-    left: -50px;
-}
+
+
 
 main {
-    background-color: var(--secondary);
     width: 800px;
     height: auto;
     margin: 20px auto;
@@ -95,6 +93,7 @@ main {
     cursor: pointer;
 }
 
+
 #option-one {
     position: absolute;
     left: 0px;
@@ -119,8 +118,31 @@ main {
 
 
 #start-game {
+    background-color: var(--tertiary);
+    color: var(--fourth);
+    font-size: 24px;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 50px;
+    width: auto;
+}
+
+#start-game:hover {
     background-color: var(--fourth);
-    color: var(--secondary);
+    color: var(--tertiary);
+    cursor: pointer;
+}
+
+#start-game:active {
+    background-color: var(--tertiary);
+    color: var(--fourth);
+    cursor: pointer;
+}
+
+#highscoreBtn {
+    background-color: var(--tertiary);
+    color: var(--fourth);
     font-size: 24px;
     position: absolute;
     left: 0px;
@@ -129,13 +151,13 @@ main {
     width: auto;
 }
 
-#start-game:hover {
-    background-color: var(--secondary);
-    color: var(--fourth);
+#highscoreBtn:hover {
+    background-color: var(--fourth);
+    color: var(--tertiary);
     cursor: pointer;
 }
 
-#start-game:active {
+#highscoreBtn:active {
     background-color: var(--tertiary);
     color: var(--fourth);
     cursor: pointer;
@@ -147,4 +169,3 @@ button {
     text-align: center;
     width: auto;
 }
-
