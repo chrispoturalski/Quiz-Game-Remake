@@ -19,35 +19,33 @@ var questions =
     {
         question: "What is 3x1?",
         answers: [
-            {
-                answer: 1,
-                correct: false
-            },
-            {
-                answer: 3,
-                correct: true
-            },
-            {
-                answer: 4,
-                correct: false
-            },
+            {option: 1, answer: false},
+            {option: 3, answer: true},
+            {option: 4, answer: false},
         ]
     },
     {
         question: "What is 4x1?",
         answers: [
-            {
-                answer: 1,
-                correct: false
-            },
-            {
-                answer: 4,
-                correct: true
-            },
-            {
-                answer: 5,
-                correct: false
-            },
+            {option: 4, answer: true},
+            {option: 3, answer: false},
+            {option: 1, answer: false},
+        ]
+    },
+    {
+        question: "What is 5x1?",
+        answers: [
+            {option: 51, answer: false},
+            {option: 4, answer: false},
+            {option: 5, answer: true},
+        ]
+    },
+    {
+        question: "What is 6x1?",
+        answers: [
+            {option: 61, answer: false},
+            {option: 6, answer: true},
+            {option: 7, answer: false},
         ]
     },
 ]
@@ -58,11 +56,6 @@ var gameRunning = false;
 var timeLeft = 60;
 var score = 0;
 var interval;
-
-//Call a function to deduct time if question is missed
-function deductTime() {
-    timeLeft -= 10;
-}
 
 function addToScore() {
     score += 10;
@@ -90,37 +83,49 @@ function startTimer() {
         if (timeLeft <= 0) {
             clearInterval(timer);
             endGame();
+            setTimer.style.display = "none";
         }
     }, 1000);
 }
 
+//Call a function to deduct time if question is missed
+function decreaseTime() {
+    timeLeft -= 5;
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        endGame();
+        setTimer.style.display = "none";
+    }
+}
+
+
+
 //Function to display the questions
 function displayQuestions(question){
     //console.log(questions[0]);
-    questionText.innerHTML = `${question.question}`;
-    optionOne.innerHTML = `${question.answers[0].answer}`
-    optionTwo.innerHTML = `${question.answers[1].answer}`
-    optionThree.innerHTML = `${question.answers[2].answer}`
-    optionOne.addEventListener('click', function(event) {
-        if(event.currentTarget.dataset.correct === 'true') {
-            score += 10;
-        } else {
-            //Take some time off of timer
-            deductTime();
-        }
-        currentQuestion++;
-        console.log(`${question.answers[0].correct}`)
-    },),
-    optionTwo.addEventListener('click', function(event) {
-        if(event.currentTarget.dataset.correct === 'true') {
-            score += 10;
-        } else {
-            //Take some time off of timer
-            deductTime();
-        }
-        currentQuestion++;
-        console.log(`${question.answers[1].correct}`)
-    },)
+    questionText.innerHTML = `${question.question}`; //displays the question
+    optionOne.innerHTML = `${question.answers[0].option}` //displays answers from array
+    optionTwo.innerHTML = `${question.answers[1].option}` //displays answers from array
+    optionThree.innerHTML = `${question.answers[2].option}` //displays answers from array
+    optionOne.addEventListener('click', getAnswer);
+    optionTwo.addEventListener('click', getAnswer);
+    optionThree.addEventListener('click', getAnswer);
+    if (questions.length === 0) {
+        endGame();
+    }
+}
+
+function getAnswer(event){
+    if (event.currentTarget.dataset.correct === "true") {
+        console.log(+10);
+    } else {
+        decreaseTime();
+    }
+    currentQuestion++;
+    displayQuestions(questions[currentQuestion]);
+    if (questions.length === currentQuestion) {
+        endGame();
+    }
 }
 
 
@@ -137,3 +142,4 @@ var endGame = function () {
 // Create event listener for game
 startBtn.addEventListener('click', startGame);
 // highscore.addEventListener('click', highscores);
+
