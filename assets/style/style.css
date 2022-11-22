@@ -31,6 +31,7 @@ main {
 
 .quiz-game-card {
     background-color: var(--fourth);
+    border: 8px outset var(--tertiary);
     position: relative;
     width: 600px;
     height: 500px;

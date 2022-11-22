@@ -18,8 +18,37 @@ var questions =
 [
     {
         question: "What is 3x1?",
-        answers: ["1", "3", "4"],
-        answer: 1
+        answers: [
+            {
+                answer: 1,
+                correct: false
+            },
+            {
+                answer: 3,
+                correct: true
+            },
+            {
+                answer: 4,
+                correct: false
+            },
+        ]
+    },
+    {
+        question: "What is 4x1?",
+        answers: [
+            {
+                answer: 1,
+                correct: false
+            },
+            {
+                answer: 4,
+                correct: true
+            },
+            {
+                answer: 5,
+                correct: false
+            },
+        ]
     },
 ]
 
@@ -27,11 +56,16 @@ var questions =
 var currentQuestion = 0;
 var gameRunning = false;
 var timeLeft = 60;
+var score = 0;
 var interval;
 
 //Call a function to deduct time if question is missed
 function deductTime() {
     timeLeft -= 10;
+}
+
+function addToScore() {
+    score += 10;
 }
 
 // Start game function
@@ -53,20 +87,40 @@ function startTimer() {
         timeLeft--;
         setTimer.textContent = timeLeft + ' Seconds Remaining';
         //When the time runs out, we need to stop the game and end the game
-        if (timeLeft === 0) {
+        if (timeLeft <= 0) {
             clearInterval(timer);
             endGame();
         }
-    }, 100);
+    }, 1000);
 }
 
 //Function to display the questions
 function displayQuestions(question){
-    console.log(questions[0]);
-    questionText.innerHTML = questions[currentQuestion].question;
-    optionOne.innerHTML = questions[currentQuestion].answers[0];
-    optionTwo.innerHTML = questions[currentQuestion].answers[1];
-    optionThree.innerHTML = questions[currentQuestion].answers[2];
+    //console.log(questions[0]);
+    questionText.innerHTML = `${question.question}`;
+    optionOne.innerHTML = `${question.answers[0].answer}`
+    optionTwo.innerHTML = `${question.answers[1].answer}`
+    optionThree.innerHTML = `${question.answers[2].answer}`
+    optionOne.addEventListener('click', function(event) {
+        if(event.currentTarget.dataset.correct === 'true') {
+            score += 10;
+        } else {
+            //Take some time off of timer
+            deductTime();
+        }
+        currentQuestion++;
+        console.log(`${question.answers[0].correct}`)
+    },),
+    optionTwo.addEventListener('click', function(event) {
+        if(event.currentTarget.dataset.correct === 'true') {
+            score += 10;
+        } else {
+            //Take some time off of timer
+            deductTime();
+        }
+        currentQuestion++;
+        console.log(`${question.answers[1].correct}`)
+    },)
 }
 
 
@@ -75,6 +129,8 @@ var endGame = function () {
     console.log("Game over!!!")
     gameRunning = false;
     timeLeft = 60;
+    questionArea.style.display = "none";
+    questionText.innerHTML = "Game over!!!!";
     //highscoreDisplay();
 }
 
