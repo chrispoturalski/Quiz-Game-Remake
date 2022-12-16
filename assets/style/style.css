@@ -140,7 +140,7 @@ main {
     cursor: pointer;
 }
 
-#highscoreBtn {
+#highscores {
     background-color: var(--tertiary);
     color: var(--fourth);
     font-size: 24px;
@@ -151,13 +151,13 @@ main {
     width: auto;
 }
 
-#highscoreBtn:hover {
+#highscores:hover {
     background-color: var(--fourth);
     color: var(--tertiary);
     cursor: pointer;
 }
 
-#highscoreBtn:active {
+#highscores:active {
     background-color: var(--tertiary);
     color: var(--fourth);
     cursor: pointer;

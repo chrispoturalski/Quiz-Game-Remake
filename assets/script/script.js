@@ -1,6 +1,5 @@
 // Variables from HTML
 var header = document.querySelector('.header')
-var highscore = document.querySelector('.highscoreBtn')
 var content = document.getElementById('content')
 var score = document.getElementById('game-score')
 var setTimer = document.getElementById('setTimer')
@@ -12,10 +11,14 @@ var optionOne = document.getElementById('option-one')
 var optionTwo = document.getElementById('option-two')
 var optionThree = document.getElementById('option-three')
 var startBtn = document.getElementById('start-game')
-var highscores = document.getElementById('highscores')
-var scoreOne = document.getElementById('score-one')
-var scoreTwo = document.getElementById('score-two')
-var scoreThree = document.getElementById('score-three')
+var highscores = document.getElementById('.highscores')
+
+// created game variables
+var currentQuestion = 0;
+var gameRunning = false;
+var timeLeft = 60;
+var score = 0;
+var interval;
 
 //Questions array
 var questions = 
@@ -54,14 +57,17 @@ var questions =
     },
 ]
 
-// created game variables
-var gameRunning = false;
-var timeLeft = 60;
-var score = 0;
-var interval;
 
 function addToScore() {
     score += 10;
+}
+
+function next() {
+    beginQuiz(questions[currentQuestion]);
+    currentQuestion++;
+    if (questions.length === currentQuestion - 1) {
+        endGame();
+    }
 }
 
 // Start game function
@@ -69,7 +75,6 @@ var startGame = function () {
     if (gameRunning) return;
     console.log("Starting the game, good luck!!!")
     gameRunning = true;
-    currentQuestion = 0;
     startTimer();
     beginQuiz(questions[currentQuestion]);
     startBtn.style.display = "none";
@@ -101,41 +106,58 @@ function decreaseTime() {
     }
 }
 
-// how to input data-correct="${question.answers[0]}
+function displayScore() {
+    score.textContent = score;
+}
 
-//Function to display the questions
-function beginQuiz(){
-    currentQuestion = 0;
-    questionText.innerHTML = questions[currentQuestion].question; //displays the question
-    optionOne.innerHTML = questions[currentQuestion].answers[0].option; //displays answers from array
-    optionTwo.innerHTML = questions[currentQuestion].answers[1].option; //displays answers from array
-    optionThree.innerHTML = questions[currentQuestion].answers[2].option; //displays answers from array
+function nextQuestion(){
     optionOne.addEventListener('click', function(event) {
         if (event.currentTarget.dataset.answer === 'true') {
-            console.log("Good job!")
+            console.log("Good Job!")
+            addToScore();
+            next();
         } else {
             console.log("Bad job!")
+            decreaseTime();
         }
     });
     optionTwo.addEventListener('click', function(event) {
         if (event.currentTarget.dataset.answer === 'true') {
             console.log("Good job!")
+            addToScore();
+            next();
         } else {
             console.log("Bad job!")
+            decreaseTime();
         }
     });
     optionThree.addEventListener('click', function(event) {
         if (event.currentTarget.dataset.answer === 'true') {
             console.log("Good job!")
+            addToScore();
+            next();
         } else {
             console.log("Bad job!")
+            decreaseTime();
         }
     });
-    if (questions.length > 4) {
-        endGame();
-    }
 }
 
+//Function to display the questions
+function beginQuiz(){
+    questionText.innerHTML = questions[currentQuestion].question; //displays the question
+    optionOne.innerHTML = questions[currentQuestion].answers[0].option; //displays answers from array
+    optionOne.setAttribute("data-answer", questions[currentQuestion].answers[0].answer)
+    optionTwo.innerHTML = questions[currentQuestion].answers[1].option; //displays answers from array
+    optionTwo.setAttribute("data-answer", questions[currentQuestion].answers[1].answer)
+    optionThree.innerHTML = questions[currentQuestion].answers[2].option; //displays answers from array
+    optionThree.setAttribute("data-answer", questions[currentQuestion].answers[2].answer)
+    nextQuestion();
+}
+
+function highscorePage() {
+    questionArea.textContent = 'Congratulations!'
+}
 
 //Function to call when the game is over
 var endGame = function () {
@@ -143,13 +165,13 @@ var endGame = function () {
     gameRunning = false;
     timeLeft = 60;
     questionArea.style.display = "none";
-    questionText.innerHTML = "Game over!!!!";
-    //highscoreDisplay();
+    highscorePage();
 }
 
 
 
 // Create event listener for game
 startBtn.addEventListener('click', startGame);
-highscoreBtn.addEventListener('click', highscores);
+//highscoreBtn.addEventListener('click', startGame);
+
 
